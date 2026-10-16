@@ -1,0 +1,322 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+header {
+    background: linear-gradient(to right, #061347, #17356d);
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+}
+
+.logo-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo {
+    width: 65px;
+    height: 65px;
+}
+
+.texto-logo h2 {
+    font-size: 15px;
+}
+
+.texto-logo p {
+    font-size: 11px;
+    color: #d9d9d9;
+}
+
+nav {
+    display: flex;
+    height: 100%;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.admin {
+    font-size: 14px;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-overlay.mostrar {
+    display: flex;
+}
+
+.modal-caja {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-icono {
+    font-size: 40px;
+    margin: 0 0 10px 0;
+}
+
+.modal-caja h3 {
+    margin: 0 0 10px 0;
+    color: #1a1a2e;
+}
+
+.modal-caja p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.modal-caja .modal-botones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-caja .modal-botones button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-confirmar {
+    background: #17356d;
+    color: white;
+}
+
+#btn-cerrar-sesion {
+    background: #0b1f63;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+#btn-cerrar-sesion:hover {
+    background: #0a1a52;
+}
+
+.contenido {
+    padding: 25px;
+}
+
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-agregar {
+    background: #0b1f63;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.buscador input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.tarjeta {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-top: 4px solid #17356d;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.tarjeta p {
+    color: gray;
+    font-size: 13px;
+}
+
+.datos {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.datos p {
+    margin: 0;
+    color: black;
+    font-size: 14px;
+}
+
+.botones {
+    display: flex;
+    gap: 10px;
+}
+
+.ver {
+    background: #eef3fb;
+    color: #17356d;
+    border: none;
+    padding: 8px 12px;
+}
+
+.editar {
+    background: #fff5d6;
+    color: #b88a00;
+    border: none;
+    padding: 8px 12px;
+}
+
+.eliminar {
+    background: #ffe7e7;
+    color: #d33;
+    border: none;
+    padding: 8px 12px;
+}
+
+.modal-editar.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-editar.modal-overlay.oculto {
+    display: none;
+}
+
+.modal-editar .modal-contenido {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 620px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.modal-editar .modal-titulo {
+    background: #061347;
+    color: white;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal-editar form {
+    padding: 20px;
+}
+
+.modal-editar .modal-fila {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.modal-editar .modal-grupo {
+    flex: 1;
+}
+
+.modal-editar label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #333;
+}
+
+.modal-editar input,
+.modal-editar select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.modal-editar input[readonly] {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.modal-editar .modal-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.modal-editar .modal-cancelar {
+    background: white;
+    color: #555;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.modal-editar .modal-guardar {
+    background: #0d1f63;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}

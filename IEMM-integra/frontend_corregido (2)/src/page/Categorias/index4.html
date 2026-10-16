@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestión de Categorías</title>
+        <link rel="stylesheet" href="style4.css" />
+    </head>
+
+    <body>
+          <script src="../../scripts/me.js"></script>
+        <header>
+            <div class="logo-contenedor">
+                <img src="../../img/ESCUDO.png" alt="" class="logo" />
+                <div class="texto-logo">
+                    <h2>Maria Montessori</h2>
+                    <p>Gestión Almacenamiento</p>
+                </div>
+            </div>
+
+            <nav>
+                <a href="../panel_principal/index1.html">Panel Principal</a>
+                <a href="../Inventario/index2.html">Inventario</a>
+                <a href="../Ubicaciones/index3.html">Ubicaciones</a>
+                <a href="../Categorias/index4.html" class="activo">Categorías</a>
+                <a href="../Usuarios/index5.html">Usuarios</a>
+                <a href="../Informe/index6.html">Informes y Análisis</a>
+            </nav>
+
+            <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>
+        </header>
+
+        <main class="contenido">
+            <div class="titulo-seccion">
+                <h2>Gestión de Categorías</h2>
+                <button type="button" id="btn-abrir-agregar-categoria" class="btn-agregar">Añadir Categorias</button>
+            </div>
+
+            <div class="buscador">
+                <input type="text" id="buscar" placeholder="Buscar categoría..." />
+            </div>
+
+            <table class="tabla-categorias" id="tabla-categorias">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Total Mat.</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-categorias">
+                    <tr>
+                        <td colspan="5">Cargando categorías...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <div id="modal-agregar-categoria-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Añadir Nueva Categoría</div>
+                <form id="form-agregar-categoria">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-cat-codigo">Código *</label>
+                            <input type="text" id="add-cat-codigo" placeholder="Ej: CAT-13" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-cat-nombre">Nombre *</label>
+                            <input type="text" id="add-cat-nombre" placeholder="Ej: Mobiliario" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-cat-descripcion">Descripción *</label>
+                            <input type="text" id="add-cat-descripcion" placeholder="Describe los materiales incluidos..." required />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-agregar-categoria" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Guardar Categoría</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-editar-categoria-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Editar Categoría</div>
+                <form id="form-editar-categoria">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-cat-codigo">Código *</label>
+                            <input type="text" id="edit-cat-codigo" readonly />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-cat-nombre">Nombre *</label>
+                            <input type="text" id="edit-cat-nombre" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-cat-descripcion">Descripción *</label>
+                            <input type="text" id="edit-cat-descripcion" required />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-editar-categoria" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="categorias.js"></script>
+
+    </body>
+</html>

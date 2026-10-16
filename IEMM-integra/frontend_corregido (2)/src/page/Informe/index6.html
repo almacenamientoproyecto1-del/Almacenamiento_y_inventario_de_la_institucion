@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Informes y Análisis</title>
+        <link rel="stylesheet" href="style6.css" />
+    </head>
+    <body>
+        <script src="../../scripts/me.js"></script>
+        <header>
+            <div class="logo-contenedor">
+                <img src="../../img/ESCUDO.png" alt="" class="logo" />
+                <div class="texto-logo">
+                    <h2>Maria Montessori</h2>
+                    <p>Gestión Almacenamiento</p>
+                </div>
+            </div>
+
+            <nav>
+                <a href="../panel_principal/index1.html">Panel Principal</a>
+                <a href="../Inventario/index2.html">Inventario</a>
+                <a href="../Ubicaciones/index3.html">Ubicaciones</a>
+                <a href="../Categorias/index4.html">Categorías</a>
+                <a href="../Usuarios/index5.html">Usuarios</a>
+                <a href="../Informe/index6.html" class="activo">Informes y Análisis</a>
+            </nav>
+
+            <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>
+        </header>
+
+        <main>
+            <h1>Informes y Análisis</h1>
+            <p class="subtitulo">
+                Resumen del inventario institucional - Maria Montessori
+            </p>
+
+            <div class="tarjetas">
+                <div class="caja">
+                    <h2 id="inf-total">- artículos</h2>
+                    <p>Total inventario</p>
+                </div>
+                <div class="caja disponible">
+                    <h2 id="inf-disponibles">- disponibles</h2>
+                    <p>Listos para uso</p>
+                </div>
+                <div class="caja agotado">
+                    <h2 id="inf-agotados">- agotados</h2>
+                    <p>Sin existencia</p>
+                </div>
+                <div class="caja danado">
+                    <h2 id="inf-danados">- dañados</h2>
+                    <p>Requieren reposición</p>
+                </div>
+            </div>
+
+            <h3>Opciones de Análisis</h3>
+
+            <div class="contenedor-paneles">
+                <div class="panel stock">
+                    <h2>Stock</h2>
+                    <p>Campos disponibles:</p>
+                    <ul>
+                        <li>Código</li>
+                        <li>Material</li>
+                        <li>Categoría</li>
+                        <li>Cantidad</li>
+                        <li>Estado</li>
+                        <li>Ubicación</li>
+                        <li>Proveedor</li>
+                    </ul>
+                    <button id="btn-exportar-stock">Exportar Stock</button>
+                </div>
+
+                <div class="panel historial">
+                    <h2>Historial</h2>
+                    <p>Campos disponibles:</p>
+                    <ul>
+                        <li>Código</li>
+                        <li>Material</li>
+                        <li>Categoría</li>
+                        <li>Fecha Adq.</li>
+                        <li>Proveedor</li>
+                        <li>Ubicación</li>
+                    </ul>
+                    <button id="btn-exportar-historial">Exportar Historial</button>
+                </div>
+
+                <div class="panel movimientos">
+                    <h2>Movimientos</h2>
+                    <p>Campos disponibles:</p>
+                    <ul>
+                        <li>Fecha</li>
+                        <li>Estado</li>
+                        <li>Material</li>
+                        <li>Cantidad</li>
+                        <li>Usuario</li>
+                    </ul>
+                    <button id="btn-exportar-movimientos">Exportar Movimientos</button>
+                </div>
+            </div>
+
+            <h3>Resumen por Categoría</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Total</th>
+                        <th>Disponibles</th>
+                        <th>Agotados</th>
+                        <th>Dañados</th>
+                        <th>% Disponibilidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-resumen-categoria">
+                    <tr>
+                        <td colspan="6">Cargando...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="informe.js"></script>
+    </body>
+</html>

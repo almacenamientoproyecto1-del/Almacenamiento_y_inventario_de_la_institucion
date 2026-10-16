@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestión de Ubicaciones</title>
+        <link rel="stylesheet" href="style3.css" />
+    </head>
+
+    <body>
+        <script src="../../scripts/me.js"></script>
+    <header>
+        <div class="logo-contenedor">
+            <img src="../../img/ESCUDO.png" alt="" class="logo" />
+            <div class="texto-logo">
+                <h2>Maria Montessori</h2>
+                <p>Gestión Almacenamiento</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="../panel_principal/index1.html">Panel Principal</a>
+            <a href="../Inventario/index2.html">Inventario</a>
+            <a href="../Ubicaciones/index3.html" class="activo">Ubicaciones</a>
+            <a href="../Categorias/index4.html">Categorías</a>
+            <a href="../Usuarios/index5.html">Usuarios</a>
+            <a href="../Informe/index6.html">Informes y Análisis</a>
+        </nav>
+
+        <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>
+    </header>
+
+        <main class="contenido">
+            <div class="titulo-seccion">
+                <h2>Gestión de Ubicaciones</h2>
+                <button type="button" id="btn-abrir-agregar-ubicacion" class="btn-agregar">Añadir Ubicacion</button>
+            </div>
+
+            <div class="buscador">
+                <input
+                    type="text"
+                    id="buscar"
+                    placeholder="Buscar ubicación o categoría..."
+                />
+            </div>
+
+            <div class="contenedor-tarjetas" id="contenedor-tarjetas">
+                <p id="ubicaciones-estado">Cargando ubicaciones...</p>
+            </div>
+        </main>
+
+        <div id="modal-agregar-ubicacion-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Añadir Nueva Ubicación</div>
+                <form id="form-agregar-ubicacion">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-u-codigo">Código *</label>
+                            <input type="text" id="add-u-codigo" placeholder="Ej: UB-001" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-u-nombre">Nombre *</label>
+                            <input type="text" id="add-u-nombre" placeholder="Ej: Bodega Central" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-u-descripcion">Descripción *</label>
+                            <input type="text" id="add-u-descripcion" placeholder="Ej: Almacenamiento principal del plantel" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-u-responsable">Responsable</label>
+                            <input type="text" id="add-u-responsable" placeholder="Ej: Administrador" />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-u-capacidad">Capacidad Máxima</label>
+                            <input type="number" id="add-u-capacidad" min="0" placeholder="Número de artículos" />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-agregar-ubicacion" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Guardar Ubicación</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+<div
+            id="modal-editar-ubicacion-overlay"
+            class="modal-editar modal-overlay oculto"
+        >
+            <div class="modal-contenido">
+                <div class="modal-titulo">Editar Ubicación</div>
+                <form id="form-editar-ubicacion">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-u-codigo">Código *</label>
+                            <input
+                                type="text"
+                                id="edit-u-codigo"
+                                readonly
+                            />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-u-nombre">Nombre *</label>
+                            <input
+                                type="text"
+                                id="edit-u-nombre"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-u-descripcion">Descripción *</label>
+                            <input
+                                type="text"
+                                id="edit-u-descripcion"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-u-responsable">Responsable</label>
+                            <input type="text" id="edit-u-responsable" />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-u-capacidad">Capacidad Máxima</label>
+                            <input
+                                type="number"
+                                id="edit-u-capacidad"
+                                min="0"
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button
+                            type="button"
+                            id="btn-cancelar-editar-ubicacion"
+                            class="modal-cancelar"
+                        >
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-ver-ubicacion-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Detalles de la Ubicación</div>
+                <div class="modal-fila">
+                    <div class="modal-grupo">
+                        <label>Nombre</label>
+                        <p id="ver-u-nombre" style="margin:4px 0; font-weight:600;"></p>
+                    </div>
+                    <div class="modal-grupo">
+                        <label>Categoría</label>
+                        <p id="ver-u-categoria" style="margin:4px 0;"></p>
+                    </div>
+                </div>
+                <div class="modal-fila">
+                    <div class="modal-grupo">
+                        <label>Descripción</label>
+                        <p id="ver-u-descripcion" style="margin:4px 0;"></p>
+                    </div>
+                </div>
+                <div class="modal-fila">
+                    <div class="modal-grupo">
+                        <label>Total Materiales</label>
+                        <p id="ver-u-materiales" style="margin:4px 0;"></p>
+                    </div>
+                    <div class="modal-grupo">
+                        <label>Total Categorías</label>
+                        <p id="ver-u-categorias" style="margin:4px 0;"></p>
+                    </div>
+                </div>
+                <div class="modal-botones">
+                    <button type="button" id="btn-cerrar-ver-ubicacion" class="modal-guardar">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="ubicaciones.js"></script>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+            </body>
+</html>

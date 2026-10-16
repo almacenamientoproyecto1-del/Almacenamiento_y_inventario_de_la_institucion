@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inventario de Materiales</title>
+        <link rel="stylesheet" href="style2.css" />
+    </head>
+    <body>
+        <script src="../../scripts/me.js"></script>
+    <header>
+        <div class="logo-contenedor">
+            <img src="../../img/ESCUDO.png" alt="" class="logo" />
+            <div class="texto-logo">
+                <h2>Maria Montessori</h2>
+                <p>Gestión Almacenamiento</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="../panel_principal/index1.html">Panel Principal</a>
+            <a href="../Inventario/index2.html" class="activo">Inventario</a>
+            <a href="../Ubicaciones/index3.html">Ubicaciones</a>
+            <a href="../Categorias/index4.html">Categorías</a>
+            <a href="../Usuarios/index5.html">Usuarios</a>
+            <a href="../Informe/index6.html">Informes y Análisis</a>
+        </nav>
+
+        <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>
+    </header>
+
+        <section class="titulo">
+            <h1>Inventario de Materiales</h1>
+
+            <button type="button" id="btn-abrir-agregar-material" class="btn-agregar">+ Añadir Material</button>
+        </section>
+
+        <section class="filtros">
+            <input
+                type="text"
+                id="buscar"
+                placeholder="Buscar por nombre o código..."
+            />
+
+            <select id="filtro-categoria">
+                <option value="">Todas las categorías</option>
+            </select>
+
+            <select id="filtro-estado">
+                <option value="">Todos los estados</option>
+                <option value="DISPONIBLE">Disponible</option>
+                <option value="STOCK_BAJO">Stock Bajo</option>
+                <option value="AGOTADO">Agotado</option>
+                <option value="DANADO">Dañado</option>
+            </select>
+
+            <select id="filtro-ubicacion">
+                <option value="">Todas las ubicaciones</option>
+            </select>
+        </section>
+
+        <section class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Cantidad</th>
+                        <th>Estado</th>
+                        <th>Ubicación</th>
+                        <th>Proveedor</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla-materiales">
+                    <tr>
+                        <td colspan="8">Cargando materiales...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div id="modal-agregar-material-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Añadir Nuevo Material</div>
+                <form id="form-agregar-material">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-mat-codigo">Código *</label>
+                            <input type="text" id="add-mat-codigo" placeholder="Ej: SE-001" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-mat-nombre">Nombre *</label>
+                            <input type="text" id="add-mat-nombre" placeholder="Ej: Silla ergonómica" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-mat-categoria">Categoría *</label>
+                            <select id="add-mat-categoria" required>
+                                <option value="">Seleccionar categoría...</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-mat-cantidad">Cantidad *</label>
+                            <input type="number" id="add-mat-cantidad" min="0" placeholder="0" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-mat-estado">Estado *</label>
+                            <select id="add-mat-estado" required>
+                                <option value="DISPONIBLE">Disponible</option>
+                                <option value="STOCK_BAJO">Stock Bajo</option>
+                                <option value="AGOTADO">Agotado</option>
+                                <option value="DANADO">Dañado</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-mat-ubicacion">Ubicación *</label>
+                            <select id="add-mat-ubicacion" required>
+                                <option value="">Seleccionar ubicación...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-agregar-material" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Guardar Material</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-editar-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Editar Material</div>
+                <form id="form-editar-material">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-codigo">Código *</label>
+                            <input
+                                type="text"
+                                id="edit-codigo"
+                                readonly
+                            />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-nombre">Nombre *</label>
+                            <input type="text" id="edit-nombre" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-categoria">Categoría *</label>
+                            <select id="edit-categoria" required></select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-cantidad">Cantidad *</label>
+                            <input
+                                type="number"
+                                id="edit-cantidad"
+                                min="0"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-estado">Estado *</label>
+                            <select id="edit-estado" required>
+                                <option value="DISPONIBLE">Disponible</option>
+                                <option value="STOCK_BAJO">Stock Bajo</option>
+                                <option value="AGOTADO">Agotado</option>
+                                <option value="DANADO">Dañado</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-ubicacion">Ubicación *</label>
+                            <select id="edit-ubicacion" required></select>
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-proveedor">Proveedor</label>
+                            <select id="edit-proveedor"></select>
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button
+                            type="button"
+                            id="btn-cancelar-editar"
+                            class="modal-cancelar"
+                        >
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="inventario.js"></script>
+    </body>
+</html>

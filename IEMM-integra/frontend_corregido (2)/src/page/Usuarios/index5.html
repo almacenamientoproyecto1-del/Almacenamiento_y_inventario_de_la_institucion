@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestión de Usuarios</title>
+        <link rel="stylesheet" href="style5.css" />
+    </head>
+    <body>
+        <script src="../../scripts/me.js"></script>
+    <header>
+        <div class="logo-contenedor">
+            <img src="../../img/ESCUDO.png" alt="" class="logo" />
+            <div class="texto-logo">
+                <h2>Maria Montessori</h2>
+                <p>Gestión Almacenamiento</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="../panel_principal/index1.html">Panel Principal</a>
+            <a href="../Inventario/index2.html">Inventario</a>
+            <a href="../Ubicaciones/index3.html">Ubicaciones</a>
+            <a href="../Categorias/index4.html">Categorías</a>
+            <a href="../Usuarios/index5.html" class="activo">Usuarios</a>
+            <a href="../Informe/index6.html">Informes y Análisis</a>
+        </nav>
+
+        <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>
+    </header>
+
+        <main class="contenedor">
+            <div class="encabezado-usuarios">
+                <h2>Gestión de Usuarios</h2>
+                <button type="button" id="btn-abrir-agregar-usuario" class="btn-agregar">Añadir Usuario</button>
+            </div>
+
+            <div class="buscador">
+                <input type="text" id="buscar-usuario" placeholder="Buscar por nombre o correo..." />
+                <button id="btn-buscar">Buscar</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Correo Electrónico</th>
+                        <th>Documento</th>
+                        <th>Cargo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-usuarios">
+                    <tr>
+                        <td colspan="6">Cargando usuarios...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="botones-extra">
+                <button id="btn-actualizar">Actualizar</button>
+                <button id="btn-exportar">Exportar</button>
+                <button id="btn-imprimir">Imprimir</button>
+                <button id="btn-reporte">Generar Reporte</button>
+            </div>
+        </main>
+
+        <div id="modal-agregar-usuario-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Añadir Nuevo Usuario</div>
+                <form id="form-agregar-usuario">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-us-nombre">Nombre *</label>
+                            <input type="text" id="add-us-nombre" placeholder="Ej: Laura" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-us-apellido">Apellido *</label>
+                            <input type="text" id="add-us-apellido" placeholder="Ej: Torres García" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-us-correo">Correo Electrónico *</label>
+                            <input type="email" id="add-us-correo" placeholder="usuario@mariamontessori.edu" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-us-cargo">Cargo *</label>
+                            <select id="add-us-cargo" required>
+                                <option value="">Seleccionar cargo...</option>
+                                <option value="RECTOR">Rector</option>
+                                <option value="COORDINADOR">Coordinador</option>
+                                <option value="SECRETARIA">Secretaría</option>
+                                <option value="DOCENTE">Docente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-us-tipo-doc">Tipo Documento *</label>
+                            <select id="add-us-tipo-doc" required>
+                                <option value="CC">Cédula de ciudadanía</option>
+                                <option value="CE">Cédula de extranjería</option>
+                                <option value="PPT">Permiso por protección temporal</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-us-documento">Documento *</label>
+                            <input type="text" id="add-us-documento" placeholder="Ej: 1020304050" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-us-estado">Estado</label>
+                            <select id="add-us-estado">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="add-us-pass">Contraseña *</label>
+                            <input type="password" id="add-us-pass" placeholder="********" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="add-us-pass2">Confirmar Contraseña *</label>
+                            <input type="password" id="add-us-pass2" placeholder="********" required />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-agregar-usuario" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Crear Usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-editar-usuario-overlay" class="modal-editar modal-overlay oculto">
+            <div class="modal-contenido">
+                <div class="modal-titulo">Editar Usuario</div>
+                <form id="form-editar-usuario">
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-us-nombre">Nombre *</label>
+                            <input type="text" id="edit-us-nombre" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-us-apellido">Apellido *</label>
+                            <input type="text" id="edit-us-apellido" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-us-correo">Correo Electrónico *</label>
+                            <input type="email" id="edit-us-correo" required />
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-us-cargo">Cargo *</label>
+                            <select id="edit-us-cargo" required>
+                                <option value="RECTOR">Rector</option>
+                                <option value="COORDINADOR">Coordinador</option>
+                                <option value="SECRETARIA">Secretaría</option>
+                                <option value="DOCENTE">Docente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-us-tipo-doc">Tipo Documento *</label>
+                            <select id="edit-us-tipo-doc" required>
+                                <option value="CC">Cédula de ciudadanía</option>
+                                <option value="CE">Cédula de extranjería</option>
+                                <option value="PPT">Permiso por protección temporal</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-us-documento">Documento *</label>
+                            <input type="text" id="edit-us-documento" required />
+                        </div>
+                    </div>
+                    <div class="modal-fila">
+                        <div class="modal-grupo">
+                            <label for="edit-us-estado">Estado *</label>
+                            <select id="edit-us-estado" required>
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="modal-grupo">
+                            <label for="edit-us-pass">Nueva Contraseña</label>
+                            <input type="password" id="edit-us-pass" placeholder="Dejar en blanco para no cambiarla" />
+                        </div>
+                    </div>
+                    <div class="modal-botones">
+                        <button type="button" id="btn-cancelar-editar-usuario" class="modal-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="modal-guardar">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="usuarios.js"></script>
+    </body>
+</html>

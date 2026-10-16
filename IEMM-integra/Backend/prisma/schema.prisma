@@ -1,0 +1,117 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Ubicacion {
+  id          Int          @id @default(autoincrement())
+  nombre      String       @unique @db.VarChar(50)
+  codigo      String?      @unique @db.VarChar(30)
+  descripcion String?      @db.VarChar(255)
+  capacidad   Int?
+  responsable String?      @db.VarChar(100)
+  implementos Implemento[]
+}
+
+model Categoria {
+  id          Int          @id @default(autoincrement())
+  nombre      String       @unique @db.VarChar(50)
+  codigo      String?      @unique @db.VarChar(30)
+  descripcion String?      @db.VarChar(255)
+  implementos Implemento[]
+}
+
+model Proveedor {
+  id         Int          @id @default(autoincrement())
+  nombre     String       @db.VarChar(100)
+  correo     String       @unique @db.VarChar(100)
+  telefono   String       @db.VarChar(20)
+  implementos Implemento[]
+}
+
+model Usuario {
+  id         Int          @id @default(autoincrement())
+  nombre     String       @db.VarChar(50)
+  apellido   String       @db.VarChar(50)
+  correo     String       @unique @db.VarChar(100)
+  cargo      Cargo
+  contraseña String       @db.VarChar(255)
+  tipo_documento TipoDocumento
+  documento  String       @unique @db.VarChar(20)
+  activo     Boolean      @default(true)
+  implementos Implemento[]
+  movimientos Movimiento[]
+}
+
+model Implemento {
+  id          Int          @id @default(autoincrement())
+  nombre      String       @db.VarChar(50)
+  codigo      String       @unique @db.VarChar(30)
+  cantidad    Int          @default(0)
+  estado      Estado
+  id_proveedor Int?
+  id_ubicacion Int
+  id_categoria Int
+  id_usuarios  Int
+  fecha_adquisicion DateTime @default(now())
+
+  proveedor   Proveedor?   @relation(fields: [id_proveedor], references: [id])
+  ubicacion   Ubicacion    @relation(fields: [id_ubicacion], references: [id])
+  categoria   Categoria    @relation(fields: [id_categoria], references: [id])
+  usuario     Usuario      @relation(fields: [id_usuarios], references: [id])
+  responsables Responsable[]
+  movimientos Movimiento[]
+}
+
+model Movimiento {
+  id              Int         @id @default(autoincrement())
+  fecha           DateTime    @default(now())
+  codigo_material String      @db.VarChar(30)
+  nombre_material String      @db.VarChar(50)
+  estado          Estado
+  cantidad        Int
+  nombre_usuario  String      @db.VarChar(101)
+  id_implemento   Int?
+  id_usuarios     Int?
+
+  implemento      Implemento? @relation(fields: [id_implemento], references: [id], onDelete: SetNull)
+  usuario         Usuario?    @relation(fields: [id_usuarios], references: [id], onDelete: SetNull)
+}
+
+model Responsable {
+  id            Int          @id @default(autoincrement())
+  tipo_documento TipoDocumento
+  documento     String       @unique @db.VarChar(20)
+  nombre        String       @db.VarChar(50)
+  apellido      String       @db.VarChar(50)
+  correo        String       @unique @db.VarChar(100)
+  cargo         Cargo
+  asignatura    String       @db.VarChar(50)
+  id_implemento Int
+
+  implemento    Implemento   @relation(fields: [id_implemento], references: [id])
+}
+
+enum Cargo {
+  SECRETARIA
+  COORDINADOR
+  RECTOR
+  DOCENTE
+}
+
+enum TipoDocumento {
+  CC
+  CE
+  PPT
+}
+
+enum Estado {
+  DISPONIBLE
+  AGOTADO
+  DANADO
+  STOCK_BAJO
+}

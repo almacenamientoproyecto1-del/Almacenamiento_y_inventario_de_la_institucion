@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sistema de Inventario</title>
+        <link rel="stylesheet" href="style1.css" />
+    </head>
+
+    <body>
+        <script src="../../scripts/me.js"></script>
+        <header>
+            <div class="logo-contenedor">
+                <img src="../../img/ESCUDO.png" alt="" class="logo" />
+                <div class="texto-logo">
+                    <h2>Maria Montessori</h2>
+                    <p>Gestión Almacenamiento</p>
+                </div>
+            </div>
+
+            <nav>
+                <a href="../panel_principal/index1.html" class="activo">Panel Principal</a>
+                <a href="../Inventario/index2.html">Inventario</a>
+                <a href="../Ubicaciones/index3.html">Ubicaciones</a>
+                <a href="../Categorias/index4.html">Categorías</a>
+                <a href="../Usuarios/index5.html">Usuarios</a>
+                <a href="../Informe/index6.html">Informes y Análisis</a>
+            </nav>
+
+            <button type="button" class="admin" id="btn-cerrar-sesion">Cerrar sesión</button>        </header>
+
+        <div class="titulo">
+            <h1>Panel Principal</h1>
+            <p>Bienvenido al sistema de gestión de almacenamiento</p>
+        </div>
+
+        <section class="estadisticas" id="tarjetas-estadisticas">
+            <div class="card azul">
+                <h2 id="stat-total">-</h2>
+                <p>Total Artículos</p>
+            </div>
+
+            <div class="card verde">
+                <h2 id="stat-disponibles">-</h2>
+                <p>Disponibles</p>
+            </div>
+
+            <div class="card naranja">
+                <h2 id="stat-agotados">-</h2>
+                <p>Agotados</p>
+            </div>
+
+            <div class="card rojo">
+                <h2 id="stat-danados">-</h2>
+                <p>Dañados</p>
+            </div>
+
+            <div class="card amarillo">
+                <h2 id="stat-stock-bajo">-</h2>
+                <p>Stock Bajo</p>
+            </div>
+
+            <div class="card celeste">
+                <h2 id="stat-categorias">-</h2>
+                <p>Categorías</p>
+            </div>
+        </section>
+
+        <h3 class="subtitulo">Accesos Rápidos</h3>
+
+        <section class="accesos">
+            <a href="../Inventario/index2.html" class="boton1">Agregar Materia</a>
+
+            <a href="../Ubicaciones/index3.html" class="boton2">
+                Agregar<br />Ubicación
+            </a>
+
+            <a href="../Informe/index6.html" class="boton3"> Ver Informes </a>
+
+            <a href="../Categorias/index4.html" class="boton4">
+                Gestionar<br />Categorías
+            </a>
+
+            <a href="#movimientos-recientes" class="boton5">Movimientos<br />Recientes</a>
+
+           <a href="../Inventario/index2.html?filtro=stock" class="boton6"> Stock Bajo </a>
+        </section>
+
+        <section class="contenido" id="stock-contenedor">
+            <div class="movimientos" id="movimientos-recientes">
+                <h3 class="titulo-tabla">Movimientos Recientes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Material</th>
+                            <th>Estado</th>
+                            <th>Cantidad</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-movimientos">
+                        <tr>
+                            <td colspan="5">Cargando...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="columna-stock">
+                <h3 class="titulo-tabla">Stock Bajo</h3>
+                <div class="stock-bajo" id="stock">
+                    <h3>Materiales con cantidad crítica</h3>
+                    <div class="lista" id="lista-stock-bajo">
+                        <p>Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="modalCerrarSesion" class="modal-overlay">
+            <div class="modal-caja">
+                <p class="modal-icono">🚪</p>
+                <h3>Cerrar sesión</h3>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div class="modal-botones">
+                    <button id="btnCancelarSalir" class="btn-cancelar">Cancelar</button>
+                    <button id="btnConfirmarSalir" class="btn-confirmar">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="panel.js"></script>
+    </body>
+</html>
